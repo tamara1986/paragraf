@@ -13,7 +13,17 @@
 	  <div class="card-footer text-muted" id="datum"></div>
 	</div>	
 <div class="row">
-	<h1 style="text-align: center;color: white;" id="naslov1">NOSIOCI POLISA</h1>
+	<div style="width: 100%">
+	<h1 style="color: white;" id="naslov1">NOSIOCI POLISA</h1>
+   <div class="form-group" id="sortTable">
+    <label for="select">Sortiraj po:</label>
+    <select class="form-control" id="selectSort" onchange="sortTableByDate()">
+      <option value="1" selected >Datumu rastuce</option>
+      <option value="2">Datumu opadajuce</option>
+    </select>
+  </div>
+  </div>
+ 
 
 <table class="table table-hover table-dark" id="tabela">
   <thead>
@@ -56,5 +66,21 @@
  
   </tbody>
 </table>
+<table class="table table-hover table-dark" id="tabela2" style="display: none;">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Nosioci polisa</th>
+      <th scope="col">Broj pasoša</th>
+      <th scope="col">Datum unosa</th>
+      <th scope="col">Polisa</th>
+    </tr>
+  </thead>
+  <tbody id="tbodyTable">
+  	
+
+  	</tbody>
+</table>
 	</div>
+
 </div>

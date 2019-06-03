@@ -30,11 +30,9 @@ class PolicyDB extends DB{
 		return $id;
 	}
 	public static function getSinglePolicy($id){
-		
 		$idInt=intval($id);
 		$user=[];
 		$sql="SELECT * FROM nosioci_osiguranja as nosilac WHERE id=".$idInt;
-
 		$req = self::executeSQL($sql);
 		$rez = $req->fetch_all(MYSQLI_ASSOC);
 		array_push($user,$rez);
@@ -43,28 +41,17 @@ class PolicyDB extends DB{
 		$req = self::executeSQL($sql);
 		$res = $req->fetch_all(MYSQLI_ASSOC);
 		array_push($user,$res);
-
 		exit(json_encode($user));
 		
 		
 		
 	}
-	// 	public static function getSinglePolicy($id){
+	public static function getSinglePolicySort($id){
+		$sql="SELECT * FROM nosioci_osiguranja ORDER BY id DESC";
+		$req = self::executeSQL($sql);
+		$rez = $req->fetch_all(MYSQLI_ASSOC);
+		exit(json_encode($rez));
+		// return $res;
 		
-	// 	$idInt=intval($id);
-	// 	$user=[];
-	// 	$sql="SELECT n.ime_i_prezime as ime,n.polisa,d.ime_i_prezime FROM nosioci_osiguranja as n
-	// 	join dodatni_osiguranici as d 
-	// 	on n.id=d.id_nosioca 
-	// 	WHERE n.id=".$idInt;
-
-	// 	$req = self::executeSQL($sql);
-	// 	$rez = $req->fetch_all(MYSQLI_ASSOC);
-		
-
-	// 	exit(json_encode($rez));
-		
-		
-		
-	// }
+	}
 }

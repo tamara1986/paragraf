@@ -22,6 +22,10 @@ table tr:hover{
     font-size: 31px;
     text-align: center;
 }
+label{
+    margin: 0;
+    color: white;
+}
 a{
     color: white;
 }
@@ -92,4 +96,14 @@ input[type="radio"]{
     width: calc(100% - 20px);
     font-size: 16px;
     text-align: center;
+}
+#naslov1{
+    display: block;
+    width: 70%;
+    float: left;
+
+}
+#sortTable{
+    width: 20%;
+    float: right;
 }

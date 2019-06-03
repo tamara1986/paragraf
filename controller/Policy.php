@@ -10,13 +10,18 @@ class Policy extends Controller{
 	public function singlePolicy(){
 		if(isset($_POST['form_data']['id'])){
 			$id=$_POST['form_data']['id'];
-			
-			$this->data['content']=PolicyDB::getSinglePolicy($id);
-
-			
+			$this->data['content']=PolicyDB::getSinglePolicy($id);	
 		}
-		
-		
+	}
+	public function sortTable(){
+		if(isset($_POST['form_data']['id'])){
+			$id=$_POST['form_data']['id'];
+			if ($id==2) {
+				$this->data['content']=PolicyDB::getSinglePolicySort($id);
+			}else{
+				$this->data['content']=PolicyDB::getSinglePolicy($id);
+			}	
+		}
 
 	}
 

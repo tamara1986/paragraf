@@ -5,26 +5,32 @@
              <form>
               <h1 class="form-headline">Prijava za putno osiguranje</h1>
               <div class="form-group">
+                 <label for="name">Ime i prezime</label>
                 <input type="text" class="form-control" id="name" placeholder="Ime i prezime*" name="name" required> 
                 <small id="nameError" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
+                 <label for="birthdate">Datum rođenja</label>
                <input id="birthdate" placeholder="Datum rođenja*" class="form-control" name="birthday" required>
                <small id="birthdayError" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
+                <label for="passport">Broj pasoša</label>
                 <input type="text" class="form-control" placeholder="Broj pasoša*" id="passport" name="passport" required>
                 <small id="passError" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
+                <label for="phone">Telefon</label>
                 <input type="text" placeholder="Telefon*" class="form-control" name="phone" id="phone" required>
                 <small id="phoneError" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
+                <label for="email">Email</label>
                 <input type="email" placeholder="Email*" class="form-control" name="email" id="email" required>
                 <small id="emailError" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
+                <label for="data-range">Datum putovanja: Od-Do</label>
                 <input id="date-range" name="dates" placeholder="Unesite datum polaska i datum povratka" class="form-control" onchange="razlikaDatuma()" required>
                 <small id="rangeError" class="form-text text-muted"></small>
                 <small id="numberOfDays" class="form-text text-muted"></small>
@@ -46,21 +52,24 @@
               
                 <div class="add_users">
                   <div class="form-group">
+                    <label for="name2">Ime i prezime</label>
                     <input type="text" placeholder="Ime i Prezime*" class="form-control" name="name2" id="name2">
                     <small id="name2Error" class="form-text text-muted"></small>
                   </div>
                   <div class="form-group">
+                    <label for="birthdate2">Datum rođenja</label>
                     <input id="birthdate2" placeholder="Datum rođenja*" class="form-control" name="birthday2">
                     <small id="birthday2Error" class="form-text text-muted"></small>
                   </div>
                   <div class="form-group">
+                    <label for="passport2">Broj pasoša</label>
                     <input type="text" placeholder="Broj pasoša*" id="passport2" class="form-control" name="passport2">
                     <small id="pass2Error" class="form-text text-muted"></small>
                   </div>
                 </div>
                 <div class="add-btn" id="add-btn">
                   <span class="add-btn-plus flex" onclick="saveUser()">+</span>
-                  <div class="add-btn-info">Dodajte korisnike:</div>
+                  <div class="add-btn-info"><&nbsp;- &nbsp;&nbsp; Dodajte dodatne osiguranike</div>
                 </div>
               </div>
               

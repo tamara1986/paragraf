@@ -109,6 +109,9 @@ $('#birthdate2').daterangepicker({
     "autoUpdateInput": true,
     "singleDatePicker": true
 });
+window.onload=function(){
+    sortTableByDate();
+}
 let niz=[];
 function showForm(){
     let input=document.getElementById('section_users');
@@ -125,6 +128,7 @@ function saveUser(){
     let birthday2=document.getElementById('birthdate2');
     let passport2=document.getElementById('passport2');
     const birth2=dateFormat(birthday2.value);
+    let arrayOfErrors=[];
     console.log(birth2);
     let error=false;
     if (name2.value=='') {
@@ -142,7 +146,15 @@ function saveUser(){
         document.getElementById("passport2").style.borderColor = "red";
         error=true;
     }
-    console.log(error);
+    if (passport2.value<13 || isNaN(passport2.value)){
+        arrayOfErrors.push('Broj pasosa mora sadrzati minimum 13 karaktera i mora biti broj!');
+        error=true;
+    }
+    if (name2.value<6) {
+        arrayOfErrors.push('Ime i prezime moraju imati minimum 6 karaktera');
+        error=true;
+    }
+
     if (error===false) {
          let a={
             "name2":name2.value,
@@ -154,6 +166,9 @@ function saveUser(){
         name2.value='';
         birthday2.value='';
         passport2.value=''; 
+    }else{
+
+        alert(JSON.stringify(arrayOfErrors));
     }
   
     
@@ -176,6 +191,7 @@ function submitForm(){
     }else{
         action=1;
     }
+    let arrayOfErr=[];
     console.log(dateGo,dateBack);
     let err=false;
     if (name=='') {
@@ -207,6 +223,22 @@ function submitForm(){
         document.getElementById('rangeError').innerHTML='Morate uneti datum polaska i odlaska';
         document.getElementById("date-range").style.borderColor = "red";
         err=true;
+    }
+    if (name.length<6) {
+        arrayOfErr.push('Ime i prezime ne smeju imati manje od 6 karaktera!');
+        err=true;
+    }
+    if (passport.length<13 || isNaN(passport)) {
+        arrayOfErr.push('Broj pasosa mora sadrzati minimum 13 karaktera i mora biti broj!');
+        err=true;
+    }
+    let emailVal=validEmail(email);
+    if (emailVal===false) {
+        arrayOfErr.push('Email nije validan!');
+        err=true;
+    }
+    if (phone.length<9) {
+        arrayOfErr.push('Telefon mora da sadrzi minimum 8 karaktera! ');
     }
     if (!err) {
         console.log('stigo');
@@ -249,6 +281,8 @@ function submitForm(){
 
             }
        });
+    }else{
+        alert(JSON.stringify(arrayOfErr));
     }
 }
     function dateFormat(date){
@@ -367,6 +401,58 @@ function submitForm(){
         }
         console.log(diffDays);
     }
+    function sortTableByDate(){
+        let e = document.getElementById("selectSort");
+        let valueSort = e.options[e.selectedIndex].value;
+    
+        console.log(valueSort);
+        let data={
+            "id":valueSort
+        }
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost/paragraf/Policy/sortTable/',
+            data: {
+            insurance_form: 1,
+            form_data : data,                 
+        },
+            success: function(response)
+            {
+                var jsonData = JSON.parse(response);
+                let html5="";
+                let tbodyTable=document.getElementById('tbodyTable');
+                let tabela2=document.getElementById('tabela2');
+                let brojac=0;
+                for (var i =1; i <jsonData.length; i++) {
+                    html5+='<tr><th scope="row">'+(++brojac)+'</th><td>'+jsonData[i]['ime_i_prezime']+'</td><td>'+jsonData[i]['broj_pasosa']+'</td><td>'+convertTimestemp(jsonData[i]['datum_unosa'])+'</td><td>'+convertAction(jsonData[i]['polisa'])+'</td></tr>';
+
+                }
+                tbodyTable.innerHTML+=html5;
+                tabela2.style.display='';
+                let tabela1=document.getElementById('tabela');
+                tabela1.style.display='none';
+
+
+            }
+       });
+
+       
+ 
+    }
+        function validEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+
+    function convertTimestemp(timeS){
+        let timeSt=timeS;
+        let timeStemp=timeSt.split(' ');
+        let datumOfTs=timeStemp[0];
+        let convert=convertDateInNormal(datumOfTs);
+        let res=convert+' '+timeStemp[1];
+        return res;
+    }
+
 
     
 
