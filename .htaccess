@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteRule ^([a-z0-9_]*)/([a-z0-9_]*)/([a-z0-9_ščć]*)$ ./index.php?c=$1&m=$2&v=$3 [NC]
+RewriteRule ^([a-z0-9_]*)/([a-z0-9_]*)/([0-9]*)/([0-9]*)$ ./index.php?c=$1&m=$2&v=$3&z=$4 [NC]
+
+
