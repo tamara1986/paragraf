@@ -25,6 +25,9 @@ table tr:hover{
 a{
     color: white;
 }
+.text-muted #numberOfDays{
+    color: green !important;
+}
 a:hover{
     background-color: white;
     color: rgb(0,0,45);

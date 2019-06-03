@@ -233,21 +233,7 @@ function submitForm(){
         }
         
 
-    // $.ajax({
-    //     url: 'http://localhost/paragraf/Home/insurance/',
-    //     type: 'POST',
-    //     data: {
-    //         insurance_form: 1,
-    //         form_data : data,                 
-    //     },
-    //     success: function(response){
-
-    //         let resp = JSON.parse(response);
-    //         console.log(resp);       
-                
-    //     },
-    //     dataType: 'text/plain'
-    // });
+   
     $.ajax({
             type: "POST",
             url: 'http://localhost/paragraf/Home/insurance/',
@@ -258,16 +244,12 @@ function submitForm(){
             success: function(response)
             {
                 var jsonData = JSON.parse(response);
-                alert(jsonData);
+                alert('Uspesno ste dodali polisu!');
+                location.reload();
 
             }
        });
     }
-
-
-
-
-
 }
     function dateFormat(date){
         let date_in_datepicker=date;
@@ -311,13 +293,8 @@ function submitForm(){
                             }
                         }else{
                             html2+='<h5 class="card-title">Dodatni osiguranik:</h5><p class="card-text">Ime i prezime:'+jsonData[i][key]["ime_i_prezime"]+'</p><p class="card-text">Broj pasoša:'+jsonData[i][key]["broj_pasosa"]+'</p><p class="card-text">Datum rođenja:'+convertDateInNormal(jsonData[i][key]["datum_rodjenja"])+'</p>';
-                            
-                           
-                            
-                        }
-
-
-                       
+                                
+                        }   
                     }
                 }
                 glavni.innerHTML+=html;
@@ -326,6 +303,8 @@ function submitForm(){
                 singlePage.style.display='flex';
                 let tabela=document.getElementById('tabela');
                 tabela.style.display='none';
+                let naslov1=document.getElementById('naslov1');
+                naslov1.style.display='none';
              
 
             }
@@ -350,7 +329,43 @@ function submitForm(){
     function back(){
         document.getElementById('singlePage').style.display='none';
         document.getElementById('tabela').style.display='';
+        document.getElementById('naslov1').style.display='block';
         location.reload();
+    }
+      function razlikaDatuma(){
+        range=document.getElementById('date-range').value;
+        let r=range.split(' - ');
+        let od=r[0].split('/');
+        let dan=od[1];
+        let mesec=od[0];
+        let godina=od[2];
+        let od2=r[1].split('/');
+        let dan2=od2[1];
+        let mesec2=od2[0];
+        let godina2=od2[2];
+        let m;
+        let m2;
+        let mesecc=mesec.indexOf('0');
+        if (mesecc==0) {
+             m=mesec.substr(1);
+        }
+        let mesecc2=mesec2.indexOf('0');
+        if (mesecc2==0) {
+             m2=mesec2.substr(1);
+        }
+        var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+        var firstDate = new Date(godina2,m2-1,dan2);
+        var secondDate = new Date(godina,m-1,dan);
+       
+
+
+        var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())))/oneDay;
+        if (diffDays>=0) {
+            document.getElementById('numberOfDays').innerHTML=diffDays+'days';
+        }else{
+            document.getElementById('rangeError').innerHTML='Datum nije dobro odabran!';
+        }
+        console.log(diffDays);
     }
 
     

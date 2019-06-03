@@ -13,7 +13,7 @@
 	  <div class="card-footer text-muted" id="datum"></div>
 	</div>	
 <div class="row">
-	<h1 style="text-align: center;color: white;">NOSIOCI POLISA</h1>
+	<h1 style="text-align: center;color: white;" id="naslov1">NOSIOCI POLISA</h1>
 
 <table class="table table-hover table-dark" id="tabela">
   <thead>

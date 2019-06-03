@@ -25,8 +25,9 @@
                 <small id="emailError" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
-                <input id="date-range" name="dates" placeholder="Unesite datum polaska i datum povratka" class="form-control" required>
+                <input id="date-range" name="dates" placeholder="Unesite datum polaska i datum povratka" class="form-control" onchange="razlikaDatuma()" required>
                 <small id="rangeError" class="form-text text-muted"></small>
+                <small id="numberOfDays" class="form-text text-muted"></small>
               </div>
               <div class="form-group">
                     <div class="flex radio-wrap">
